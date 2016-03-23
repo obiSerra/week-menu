@@ -6,7 +6,7 @@ class CalendarDayForm extends React.Component{
     constructor(props) {
         super(props);
         const { data = {lunch: null, dinner: null} } = props;
-        this.state = { lunch: data.lunch, dinner: data.dinner };
+        this.state = { lunch: data.lunch.join(','), dinner: data.dinner.join(',') };
     }
     handleLunchChange (e) {
         this.setState({ lunch: e.target.value });
@@ -19,7 +19,7 @@ class CalendarDayForm extends React.Component{
 
         const handleAddDay = (e) => {
             e.preventDefault();
-            addDay(day.toObject(), this.state.lunch, this.state.dinner);
+            addDay(day.toObject(), this.state.lunch.split(','), this.state.dinner.split(','));
             editDay(null);
         };
 
@@ -45,7 +45,6 @@ class CalendarDayForm extends React.Component{
             </form>
         );
     }
-
 };
 
 
@@ -57,8 +56,8 @@ const CalendarContent = (props) => {
     }
     return (
         <div>
-            <div>{data.lunch}</div>
-            <div>{data.dinner}</div>
+            <div>{data.lunch.join(' -')}</div>
+            <div>{data.dinner.join(' -')}</div>
             {props.children}
         </div>
     );
