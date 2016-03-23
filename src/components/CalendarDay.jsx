@@ -14,12 +14,12 @@ class CalendarDayForm extends React.Component{
         this.setState({ dinner: e.target.value });
     }
     render () {
-        const { day, addDay } = this.props;
+        const { day, addDay, editDay } = this.props;
 
         const handleAddDay = (e) => {
             e.preventDefault();
             addDay(day.toObject(), this.state.lunch, this.state.dinner);
-            console.log(this.state);
+            editDay(null);
         };
 
         return (
@@ -59,7 +59,7 @@ const CalendarDay = (props) => {
     let displayContent = () => (<a href="#" onClick={editCurrentDay}>Edit</a>);
 
     if (editingObj && editingObj.diff(dayObj, 'days') === 0) {
-        displayContent = () => (<CalendarDayForm addDay={addDay} day={day} />);
+        displayContent = () => (<CalendarDayForm addDay={addDay} day={day} editDay={editDay} />);
     }
 
     return (
