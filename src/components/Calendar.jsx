@@ -36,11 +36,11 @@ const Calendar = (props) => {
     return (<div>
         <h3>Calendar</h3>
 
-        <ul className="list-unstyled list-inline">
+        <ul className="list-unstyled list-inline current-week calendar-week">
             {currentWeekLI}
         </ul>
 
-        <ul className="list-unstyled list-inline">
+        <ul className="list-unstyled list-inline calendar-week">
             {nextWeekLI}
         </ul>
     </div>);

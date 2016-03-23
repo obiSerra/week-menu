@@ -2,10 +2,13 @@
 import React from 'react';
 import moment from 'moment';
 
+require('../less/calendar.less');
+
+
 class CalendarDayForm extends React.Component{
     constructor(props) {
         super(props);
-        const { data = {lunch: null, dinner: null} } = props;
+        const { data = {lunch: [], dinner: []} } = props;
         this.state = { lunch: data.lunch.join(','), dinner: data.dinner.join(',') };
     }
     handleLunchChange (e) {
@@ -54,10 +57,19 @@ const CalendarContent = (props) => {
     if (!data || !_.has(data, 'lunch') || !_.has(data, 'dinner')) {
         return '';
     }
+
+    const displayData = (list) => list.map((d) => {
+        console.log(d);
+        return(<li key={d}>{d}</li>)
+    });
     return (
         <div>
-            <div>{data.lunch.join(' -')}</div>
-            <div>{data.dinner.join(' -')}</div>
+            <small>Lunch</small>
+            <br/>
+            <ul className="">{displayData(data.lunch)}</ul>
+            <small>Dinner</small>
+            <br/>
+            <ul className="">{displayData(data.dinner)}</ul>
             {props.children}
         </div>
     );
