@@ -17,8 +17,6 @@ import Calendar from '../components/Calendar.jsx';
 
 let App = (props) => {
     const { dispatch, dayList, editing } = props;
-
-    console.log(props);
     return (
         <div>
             <Title title="Week menu planning!" />

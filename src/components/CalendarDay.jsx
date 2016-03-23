@@ -5,7 +5,8 @@ import moment from 'moment';
 class CalendarDayForm extends React.Component{
     constructor(props) {
         super(props);
-        this.state = { lunch: "", dinner: "" };
+        const { data = {lunch: null, dinner: null} } = props;
+        this.state = { lunch: data.lunch, dinner: data.dinner };
     }
     handleLunchChange (e) {
         this.setState({ lunch: e.target.value });
@@ -48,18 +49,35 @@ class CalendarDayForm extends React.Component{
 };
 
 
+const CalendarContent = (props) => {
+    const { data } = props;
+
+    if (!data || !_.has(data, 'lunch') || !_.has(data, 'dinner')) {
+        return '';
+    }
+    return (
+        <div>
+            <div>{data.lunch}</div>
+            <div>{data.dinner}</div>
+            {props.children}
+        </div>
+    );
+};
+
 const CalendarDay = (props) => {
-    const { day, editDay, editing, addDay } = props;
+    const { day, editDay, editing, addDay, data } = props;
 
     const dayObj = moment(day);
     const editingObj = (_.isNull(editing)) ? null : moment(editing);
 
     const editCurrentDay = () => editDay(dayObj.toObject());
-
-    let displayContent = () => (<a href="#" onClick={editCurrentDay}>Edit</a>);
+    const editBtn = (<a href="#" onClick={editCurrentDay}>Edit</a>);
+    let displayContent = () => editBtn;
 
     if (editingObj && editingObj.diff(dayObj, 'days') === 0) {
-        displayContent = () => (<CalendarDayForm addDay={addDay} day={day} editDay={editDay} />);
+        displayContent = () => (<CalendarDayForm addDay={addDay} day={day} editDay={editDay} data={data} />);
+    } else if (data && _.has(data, 'lunch') && _.has(data, 'dinner')) {
+        displayContent = () => (<CalendarContent data={data}> {editBtn} </CalendarContent>);
     }
 
     return (

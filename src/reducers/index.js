@@ -15,9 +15,7 @@ const dayList = (state = [], action = {}) => {
                     lunch: action.lunch,
                     dinner: action.dinner
                 }
-            ].concat(...state.filter((d) => {
-                return moment(d.day).diff(mDay, 'days') !== 0
-            }));
+            ].concat(...state.filter((d) => moment(d.day).diff(mDay, 'days') !== 0));
         default:
             return state;
     }

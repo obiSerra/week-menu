@@ -1,7 +1,7 @@
 // Import react components
 import React from 'react';
 import moment from 'moment';
-
+import _ from 'lodash';
 import CalendarDay from './CalendarDay.jsx';
 
 const generateWeekList = (dayStart) => {
@@ -12,18 +12,20 @@ const generateWeekList = (dayStart) => {
     return list;
 };
 
-const generateDay = (day, editDay, editing, addDay) => (
+const generateDay = (day, editDay, editing, addDay, data) => (
     <li key={day.format('D')}>
-        <CalendarDay addDay={addDay} editDay={editDay} day={day} editing={editing} />
+        <CalendarDay addDay={addDay} editDay={editDay} day={day} editing={editing} data={data} />
     </li>
 );
 
 const Calendar = (props) => {
     const { dayList, addDay, editDay, editing } = props;
 
-    console.log(dayList);
 
-    const generateDayElement = (day) => generateDay(day, editDay, editing, addDay);
+    const isSameDay = (d1, d2) => moment(d1).diff(moment(d2), 'days') === 0;
+
+    const generateDayElement = (day) => generateDay(day, editDay, editing, addDay,
+        _.first(dayList.filter(d =>isSameDay(d.day, day.toObject()))));
 
     const currentWeekStart = moment().startOf('week').subtract(1, 'day');
     const currentWeek = generateWeekList(currentWeekStart);
