@@ -21,6 +21,8 @@ const generateDay = (day, editDay, editing, addDay) => (
 const Calendar = (props) => {
     const { dayList, addDay, editDay, editing } = props;
 
+    console.log(dayList);
+
     const generateDayElement = (day) => generateDay(day, editDay, editing, addDay);
 
     const currentWeekStart = moment().startOf('week').subtract(1, 'day');
