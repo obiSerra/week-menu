@@ -34,7 +34,7 @@
     module.exports = {
         entry: entry,
         output: {
-            path: __dirname + '/build',
+            path: __dirname + '/build/public',
             publicPath: '/public/',
             filename: 'bundle.js',
             sourceMapFilename: '[file].map'
