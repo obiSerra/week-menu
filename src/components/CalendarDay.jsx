@@ -59,7 +59,6 @@ const CalendarContent = (props) => {
     }
 
     const displayData = (list) => list.map((d) => {
-        console.log(d);
         return(<li key={d}>{d}</li>)
     });
     return (

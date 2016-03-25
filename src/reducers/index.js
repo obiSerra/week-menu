@@ -3,10 +3,12 @@ import _ from 'lodash';
 
 import moment from 'moment';
 
-import { ADD_DAY, EDIT_DAY } from '../actions/actions.js';
+import { ADD_DAY, EDIT_DAY, RECEIVE_DAY_LIST } from '../actions/actions.js';
 
 const dayList = (state = [], action = {}) => {
     switch (action.type) {
+        case RECEIVE_DAY_LIST:
+            return action.dayList;
         case ADD_DAY:
             const mDay = moment(action.day);
             return [

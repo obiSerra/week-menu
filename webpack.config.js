@@ -1,7 +1,12 @@
 (function () {
     var path = require('path'),
         webpack = require('webpack'),
-        plugins = [new webpack.HotModuleReplacementPlugin()],
+        plugins = [
+            new webpack.HotModuleReplacementPlugin(),
+            new webpack.ProvidePlugin({
+                'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+            })
+        ],
         DEV_SEVERITY = 1,
         entryDev = [
             'webpack-dev-server/client?http://0.0.0.0:8080', // WebpackDevServer host and port
