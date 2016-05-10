@@ -3,3 +3,6 @@ build
 .idea
 
 firebase.json
+
+src/config/baseurl-dev.js
+src/config/baseurl-prod.js

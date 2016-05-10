@@ -1,4 +1,4 @@
-import config from '../lib/config.js';
+import config from '../config/config.js';
 import _ from 'lodash';
 
 export const ADD_DAY = 'ADD_DAY';
