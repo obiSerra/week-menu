@@ -9,13 +9,14 @@ const dayList = (state = [], action = {}) => {
             return action.dayList;
         case ADD_DAY:
             const mDay = moment(action.day);
+
             return [
                 {
                     day: action.day,
                     lunch: action.lunch,
                     dinner: action.dinner
                 }
-            ].concat(...state.filter((d) => moment(d.day).diff(mDay, 'days') !== 0));
+            ].concat(...state.filter((d) => moment(d.day).diff(mDay, 'days') !== 0)).sort((a, b) => (a.day > b.day) ? 1 : -1);
         default:
             return state;
     }
