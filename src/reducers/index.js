@@ -1,37 +1,7 @@
 import { combineReducers } from 'redux';
-import _ from 'lodash';
 
-import moment from 'moment';
-
-import { ADD_DAY, EDIT_DAY, RECEIVE_DAY_LIST } from '../actions/actions.js';
-
-const dayList = (state = [], action = {}) => {
-    switch (action.type) {
-        case RECEIVE_DAY_LIST:
-            return action.dayList;
-        case ADD_DAY:
-            const mDay = moment(action.day);
-            return [
-                {
-                    day: action.day,
-                    lunch: action.lunch,
-                    dinner: action.dinner
-                }
-            ].concat(...state.filter((d) => moment(d.day).diff(mDay, 'days') !== 0));
-        default:
-            return state;
-    }
-};
-
-const editing = (state = null, action = {}) => {
-
-    switch (action.type) {
-        case EDIT_DAY:
-            return action.day;
-        default:
-            return state;
-    }
-};
+import dayList from './dayListReducer';
+import editing from './editingReducer';
 
 const rootReducer = combineReducers({
     dayList,
