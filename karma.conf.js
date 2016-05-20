@@ -28,11 +28,11 @@ module.exports = function (config) {
         loaders: [
           { test: /\.jsx?$/, exclude: [/node_modules/], loader: 'babel' },
           { test: /\.jsx?$/, include: [
-            //path.resolve(__dirname, '_tests_/src'),
-            path.resolve.apply(null, [
-              __dirname,
-              'src/actions'
-            ])
+              path.resolve(__dirname, 'src')
+              /*path.resolve(__dirname, 'src/actions'),
+              path.resolve(__dirname, 'src/components'),
+              path.resolve(__dirname, 'src/containers'),
+              path.resolve(__dirname, 'src/reducers')*/
           ], exclude: [/node_modules/], loader: 'isparta' }
         ]
       },
