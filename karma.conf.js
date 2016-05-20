@@ -28,10 +28,12 @@ module.exports = function (config) {
         loaders: [
           { test: /\.jsx?$/, exclude: [/node_modules/], loader: 'babel' },
           { test: /\.jsx?$/, include: [
-            path.resolve(__dirname, '_tests_/src'),
-            path.resolve(__dirname, 'src/')
+            //path.resolve(__dirname, '_tests_/src'),
+            path.resolve.apply(null, [
+              __dirname,
+              'src/actions'
+            ])
           ], exclude: [/node_modules/], loader: 'isparta' }
-          //{test: /\.jsx?$/, include: './_test_/', exclude: /node_modules/, loader: 'isparta'}
         ]
       },
       watch: true,
@@ -52,7 +54,7 @@ module.exports = function (config) {
         reporters: [
             // reporters not supporting the `file` property
             { type: 'html', subdir: 'report-html' },
-            { type: 'text' },
+            //{ type: 'text' },
             { type: 'text-summary'}
         ]
     }
