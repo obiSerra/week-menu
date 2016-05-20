@@ -44,10 +44,10 @@ export const saveDateRemotely = (day, lunch, dinner) => {
             method: 'PUT',
             body: JSON.stringify({ day, lunch, dinner })
         }).then(response => {
-            if (response.status === 200) {
+            if (response.ok) {
                 dispatch(savedDay());
             } else {
-                dispatch(errorDay('No 200'))
+                throw { status: response.status };
             }
         }).catch(error => dispatch(errorDay(error)));
     }
