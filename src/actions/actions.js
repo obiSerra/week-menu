@@ -21,10 +21,8 @@ const parseList = (listObj) => _.toArray(listObj);
 export const fetchDayList = () => {
     return dispatch => {
         dispatch(requestDayList());
-
-        fetch(config.dayListUrl())
-            .then(response => response.text())
-            .then(str => JSON.parse(str))
+        return fetch(config.dayListUrl())
+            .then(response => response.json())
             .then(json => dispatch(receiveDayList(parseList(json))))
             .catch(error => dispatch(errorDayList()));
     }
@@ -42,7 +40,7 @@ export const errorDay = (error) => ({ type: ERROR_DAY, error });
 export const saveDateRemotely = (day, lunch, dinner) => {
     return dispatch => {
         dispatch(saveDay(day, lunch, dinner));
-        fetch(config.dayUrl(day), {
+        return fetch(config.dayUrl(day), {
             method: 'PUT',
             body: JSON.stringify({ day, lunch, dinner })
         }).then(response => {
